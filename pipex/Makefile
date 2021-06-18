@@ -6,7 +6,7 @@
 #    By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 21:20:41 by rmander           #+#    #+#              #
-#    Updated: 2021/06/18 21:27:46 by rmander          ###   ########.fr        #
+#    Updated: 2021/06/18 21:31:10 by rmander          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ $(NAME): $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	rm -rf $(DEPS)
 
 fclean: clean
 	rm -rf $(NAME)
