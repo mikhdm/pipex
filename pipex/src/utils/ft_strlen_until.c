@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_strlen_until.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/06/18 21:55:33 by rmander          ###   ########.fr       */
+/*   Created: 2021/06/18 22:19:12 by rmander           #+#    #+#             */
+/*   Updated: 2021/06/18 22:20:58 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include <stddef.h>
 
-#endif
+size_t	ft_strlen_until(const char *s, const char sym)
+{
+	size_t	i;
+
+	i = 0;
+	while (*s && (*s != sym))
+	{
+		++i;
+		++s;
+	}
+	return (i);
+}

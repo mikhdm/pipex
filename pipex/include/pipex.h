@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/06/18 21:55:33 by rmander          ###   ########.fr       */
+/*   Created: 2021/06/18 21:54:14 by rmander           #+#    #+#             */
+/*   Updated: 2021/06/18 22:21:55 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
-#endif
+# define PATH_SEPARATOR "/"
+
+# endif

@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/06/18 21:32:28 by rmander          ###   ########.fr       */
+/*   Updated: 2021/06/18 22:27:11 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,36 @@
 #include <stdio.h>
 #include <errno.h>
 
-void	child()
-{ 
-	printf("I'm child with pid (by getpid): %d\n", getpid());
+char const *envval(char **envp, char const *name)
+{
+	(void) name;
+	(void) envp; 
+	return ("abc");
 }
 
-int		main(int argc, char **argv)
+char const	*executable(char const *path, char **envp)
+{
+	int accessed;
+	
+	accessed = access(path, F_OK | X_OK);
+	if (accessed == -1) 
+		exit(errno);
+	if (accessed == 0)
+		return (path);
+
+	/* TODO */
+
+	(void) envp;
+	return (path);
+}
+
+void	child(char **envp)
+{ 
+	char *argv[] = {"/bin/ls", "-al", NULL};
+	execve(argv[0], argv, envp);
+}
+
+int		main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
@@ -31,8 +55,9 @@ int		main(int argc, char **argv)
 	if (pid == -1)
 		exit(errno);
 	if (pid == 0)
-		child();
-	else
-		printf("I'm parent, who created child with pid: %d\n", pid);
+	{
+		child(envp);
+		return (0);
+	}
 	return (0);
 }
