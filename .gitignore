@@ -1,4 +1,6 @@
 .DS_Store
 .cache/
+cmake.debug/
+compile_commands.json
 *.o
 *.d
