@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: rmander <rmander@student.21-school.ru      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/18 21:54:14 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 23:05:45 by rmander          ###   ########.fr       */
+/*   Created: 2021/07/13 22:18:35 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/13 22:18:39 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include <stdlib.h>
 
-# define PATH_SEP "/"
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-
-# endif
+	i = 0;
+	while (*s++)
+		++i;
+	return (i);
+}

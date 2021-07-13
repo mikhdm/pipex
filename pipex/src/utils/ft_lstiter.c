@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 22:40:25 by rmander          ###   ########.fr       */
+/*   Created: 2020/11/18 17:50:44 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/13 23:16:58 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "utils.h"
 
-# define ERR_ERRNO (-1) 
-
-typedef enum e_error
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	ERR_ARGS_WRONG = 0,
-}	t_error;
-
-void	puterror(int const code);
-void	pexit(int const code, int status);
-void	pexitfree(int const code, int status, void *data);
-
-#endif
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}

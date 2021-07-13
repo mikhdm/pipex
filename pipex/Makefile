@@ -6,16 +6,35 @@
 #    By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 21:20:41 by rmander           #+#    #+#              #
-#    Updated: 2021/06/18 23:03:08 by rmander          ###   ########.fr        #
+#    Updated: 2021/07/13 23:15:17 by rmander          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-CC = ~/.brew/Cellar/llvm/12.0.0_1/bin/clang-12
+CC = clang-12
 INCLUDE = ./include
 CFLAGS = -Wall -Wextra -Werror -MMD -I$(INCLUDE)
-SRCS =  ./src/utils/ft_strlen_until.c ./src/utils/ft_strdup_until.c ./src/utils/ft_split.c \
-	   ./src/pipex.c ./src/error.c ./src/parse.c
+SRCS =  ./src/utils/ft_strlen_until.c \
+		./src/utils/ft_strlen.c \
+		./src/utils/ft_strdup_until.c \
+		./src/utils/ft_splitf.c \
+		./src/utils/ft_putendl_fd.c \
+		./src/utils/ft_putstr_fd.c \
+		./src/utils/ft_memcpy.c \
+		./src/utils/ft_strjoin.c \
+		./src/utils/ft_lstadd_back.c \
+		./src/utils/ft_lstadd_front.c \
+		./src/utils/ft_lstclear.c \
+		./src/utils/ft_lstdelone.c \
+		./src/utils/ft_lstiter.c \
+		./src/utils/ft_lstlast.c \
+		./src/utils/ft_lstmap.c \
+		./src/utils/ft_lstnew.c \
+		./src/utils/ft_lstsize.c \
+		./src/pipex.c \
+		./src/error.c \
+		./src/parse.c
+
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 

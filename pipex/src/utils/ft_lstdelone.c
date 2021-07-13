@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 22:40:25 by rmander          ###   ########.fr       */
+/*   Created: 2020/11/18 00:05:16 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/13 23:17:22 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "utils.h"
+#include <stdlib.h>
 
-# define ERR_ERRNO (-1) 
-
-typedef enum e_error
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	ERR_ARGS_WRONG = 0,
-}	t_error;
-
-void	puterror(int const code);
-void	pexit(int const code, int status);
-void	pexitfree(int const code, int status, void *data);
-
-#endif
+	if (!del)
+		return ;
+	del(lst->content);
+	free(lst);
+	lst = NULL;
+}

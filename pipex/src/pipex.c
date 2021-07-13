@@ -6,24 +6,47 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/06/18 23:10:24 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/13 23:46:14 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "error.h"
+#include "utils.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
 
-char const *envval(char **envp, char const *name)
+t_list	buildenv(char **envp)
 {
-	(void) name;
-	(void) envp; 
-	return ("abc");
+	t_list	env;
+	char	*eq;
+	char	*kv[2];
+	
+	eq = NULL;
+	kv[0] = NULL;
+	kv[1] = NULL;
+	while (*envp)
+	{	
+		eq = ft_strchr(*envp, '=');
+		kv[0] = ft_strdup_until(*envp, *eq); 
+		if (kv[0])
+			/* TODO */
+			pexitfree(ERR_ERRNO, errno, /* t_meta */); 
+		envp++;
+	}
+	return (env);
 }
 
-char const	*executable(char const *path, char **envp)
+
+/* char const getenvv(t_list **envp, char const *name) */
+/* { */
+
+/* 	return ("abc"); */
+/* } */
+
+char const	*binfile(char const *path, char **envp)
 {
 	int accessed;
 	
@@ -39,7 +62,7 @@ char const	*executable(char const *path, char **envp)
 	return (path);
 }
 
-void	child(char **envp)
+void	forked(char **envp)
 { 
 	char *argv[] = {"/bin/ls", "-al", NULL};
 	execve(argv[0], argv, envp);
@@ -47,17 +70,28 @@ void	child(char **envp)
 
 int		main(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void) argv;
 	pid_t	pid;
+	size_t	proccnt;
+	t_list	env;
 
-	pid = fork();
-	if (pid == -1)
-		exit(errno);
-	if (pid == 0)
-	{
-		child(envp);
-		return (0);
-	}
+	(void) argv;
+	(void) pid;
+
+	if (argc < 5)
+		pexit(ERR_ARGS_WRONG, 255);
+	env = buildenv(envp);
+	proccnt = argc - 3;
+	/* forked(envp); */
+	/* while (proc_cnt--) */
+	/* { */
+	/* 	pid = fork(); */
+	/* 	if (pid == -1) */
+	/* 		exit(errno); */
+	/* 	if (pid == 0) */
+	/* 	{ */
+	/* 		forked(envp); */
+	/* 		return (0); */
+	/* 	} */
+	/* } */
 	return (0);
 }
