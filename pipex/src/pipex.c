@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/14 20:29:22 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/17 04:24:21 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	buildenv(char **envp)
 	while (*envp)
 	{	
 		eq = ft_strchr(*envp, '=');
-		kv[0] = ft_strdup_until(*envp, *eq); 
+		kv[0] = ft_strdup_until(*envp, *eq);
 		if (kv[0])
 			/* TODO */
 			pexitfree(ERR_ERRNO, errno, /* t_meta */); 
