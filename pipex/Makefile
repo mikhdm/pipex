@@ -6,7 +6,7 @@
 #    By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 21:20:41 by rmander           #+#    #+#              #
-#    Updated: 2021/07/13 23:15:17 by rmander          ###   ########.fr        #
+#    Updated: 2021/07/18 20:41:54 by rmander          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRCS =  ./src/utils/ft_strlen_until.c \
 		./src/utils/ft_putstr_fd.c \
 		./src/utils/ft_memcpy.c \
 		./src/utils/ft_strjoin.c \
+		./src/utils/ft_strcmp.c \
+		./src/utils/ft_strchr.c \
 		./src/utils/ft_lstadd_back.c \
 		./src/utils/ft_lstadd_front.c \
 		./src/utils/ft_lstclear.c \
@@ -31,6 +33,7 @@ SRCS =  ./src/utils/ft_strlen_until.c \
 		./src/utils/ft_lstmap.c \
 		./src/utils/ft_lstnew.c \
 		./src/utils/ft_lstsize.c \
+		./src/environ.c \
 		./src/pipex.c \
 		./src/error.c \
 		./src/parse.c

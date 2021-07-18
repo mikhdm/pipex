@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 00:06:35 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/18 18:20:22 by rmander          ###   ########.fr       */
+/*   Created: 2021/07/18 19:58:52 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/18 20:03:51 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include <stdlib.h>
-
-t_list	*ft_lstnew(void *content)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_list	*node;
-
-	node = NULL;
-	if (!(node = malloc(sizeof(t_list))))
-		return (NULL);
-	node->content = content;
-	node->next = NULL;
-	return (node);
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			break ;
+		++s1;
+		++s2;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

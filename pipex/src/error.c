@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:27 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 23:49:27 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/18 18:20:21 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	pexit(int const code, int status)
 	exit(status);
 }
 
-void	pexitfree(int const code, int status, void *data)
+void	pexitfree(int const code, int status, t_meta *meta, void *extra)
 {
-	if (data)
-		cleanup(data);
+	free(meta);
+	free(extra);
 	pexit(code, status);
 }

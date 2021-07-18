@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:19:50 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 23:30:58 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/18 20:03:48 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen_until(const char *s, const char sym);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(const char *s1, const char *s2);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

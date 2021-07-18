@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   environ.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 00:06:35 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/18 18:20:22 by rmander          ###   ########.fr       */
+/*   Created: 2021/07/18 18:34:46 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/18 20:06:34 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ENVIRON_H
+# define ENVIRON_H
+
 #include "utils.h"
-#include <stdlib.h>
+#include "pipex.h"
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*node;
+void	build_environ(t_meta *meta, char **envp);
+char	*get_environ_by_key(const char *key);
 
-	node = NULL;
-	if (!(node = malloc(sizeof(t_list))))
-		return (NULL);
-	node->content = content;
-	node->next = NULL;
-	return (node);
-}
+#endif
