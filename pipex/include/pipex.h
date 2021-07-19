@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 21:54:14 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/19 23:05:17 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/20 01:21:49 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_meta {
 	char 	*title;
 	char 	*in;
 	char 	*out;
+	char 	**envp;
 	char 	**dirs;
 	t_list	*env;
 }	t_meta;

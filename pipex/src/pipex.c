@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/19 23:16:27 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/20 00:12:40 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ char	*bin_path(t_meta *meta, const char *base)
 	char	*path;
 	char	**dirs;
 
-	slashed = ft_strchr(base, '/');
 	dirs = NULL;
 	path = NULL;
+	slashed = ft_strchr(base, '/');
+	if (!base)
+		return (NULL);
 	if (slashed)
 	{
 		ok = access(base, F_OK | X_OK);
@@ -56,6 +58,7 @@ char	*bin_path(t_meta *meta, const char *base)
 		ok = access(path, F_OK | X_OK);
 		if (ok == 0)
 			return (path);
+		++dirs;
 	}
 	return (NULL);
 }
