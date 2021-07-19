@@ -7,10 +7,31 @@ set(CMAKE_SOURCE_DIR cmake.debug)
 
 include_directories(include)
 
-add_executable(pipex
-./src/utils/ft_strlen_until.c
-./src/utils/ft_strdup_until.c
+set(SRCS ./src/utils/ft_strlen_until.c 
+./src/utils/ft_strlen.c 
+./src/utils/ft_strdup_until.c 
+./src/utils/ft_splitf.c 
+./src/utils/ft_putendl_fd.c 
+./src/utils/ft_putstr_fd.c 
+./src/utils/ft_memcpy.c 
+./src/utils/ft_strjoin.c 
+./src/utils/ft_strcmp.c 
+./src/utils/ft_strchr.c 
+./src/utils/ft_lstadd_back.c 
+./src/utils/ft_lstadd_front.c 
+./src/utils/ft_lstclear.c 
+./src/utils/ft_lstdelone.c 
+./src/utils/ft_lstiter.c 
+./src/utils/ft_lstlast.c 
+./src/utils/ft_lstmap.c 
+./src/utils/ft_lstnew.c 
+./src/utils/ft_lstsize.c
+./src/utils/alloca_to.c
+./src/utils/ft_isspace.c
 ./src/utils/ft_split.c
+./src/environ.c
 ./src/pipex.c
-./src/error.c
-./src/parse.c)
+./src/error.c 
+./src/main.c)
+
+add_executable(pipex ${SRCS})

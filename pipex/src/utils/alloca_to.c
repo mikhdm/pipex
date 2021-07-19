@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   alloca_to.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/18 21:54:56 by rmander           #+#    #+#             */
-/*   Updated: 2021/06/18 21:55:34 by rmander          ###   ########.fr       */
+/*   Created: 2021/07/19 16:10:26 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/19 16:11:52 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "utils.h"
+#include <stdlib.h>
 
-# endif
+short int	alloca_to(void **ptr, size_t size)
+{
+	*ptr = malloc(size);
+	if (!*ptr)
+		return (FALSE);
+	return (TRUE);
+}

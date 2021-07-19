@@ -6,14 +6,14 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 18:34:58 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/18 20:13:37 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/19 23:06:22 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "error.h"
 #include "utils.h"
-#include <stdlib.h>
+#include "environ.h"
 #include <errno.h>
 
 static void	add_environ(t_meta *meta, t_kv *kv) 
@@ -38,15 +38,14 @@ void	build_environ(t_meta *meta, char **envp)
 {
 	t_kv	*kv;
 	char	*curr;
-	
-	curr = NULL;
+
 	kv = NULL;
+	curr = NULL;
 	while (*envp)
 	{	
 		curr = *envp;
-		kv = malloc(sizeof(t_kv));
-		if (!kv)
-			pexitfree(ERR_ERRNO, 255, meta, kv);
+		if (!alloca_to((void **)&kv, sizeof(t_kv)))
+			pexitfree(ERR_ERRNO, 255, meta, NULL);
 		kv->key = ft_strdup_until(curr, '=');
 		if (!kv->key)
 			pexitfree(ERR_ERRNO, 255, meta, kv);
@@ -72,7 +71,7 @@ char	*get_environ_by_key(t_meta *meta, const char *key)
 		kv = (t_kv *)curr->content;
 		if (ft_strcmp(kv->key, key) == 0)
 			return (kv->value);
-		curr++;
+		curr = curr->next;
 	}
 	return (NULL);
 }

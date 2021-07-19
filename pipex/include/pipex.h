@@ -6,24 +6,24 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 21:54:14 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/18 18:09:23 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/19 23:05:17 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# define PATH_SEP "/"
-
 # include "utils.h"
 
 typedef struct s_meta {
+	char 	*title;
+	char 	*in;
+	char 	*out;
+	char 	**dirs;
 	t_list	*env;
 }	t_meta;
 
-typedef struct s_kv {
-	char	*key;
-	char	*value;
-}	t_kv;
+char		**dirs_by_pathenv(t_meta *meta, const char *path);
+char		*bin_path(t_meta *meta, const char *base);
 
 # endif
