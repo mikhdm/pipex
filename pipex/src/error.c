@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:27 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/20 01:17:31 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 00:24:50 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	puterror(int const code)
+static void	puterror(char *title, int const code)
 {
 	int			count;
 	const char	*errors[] = {"Invalid arguments"};
@@ -26,21 +26,25 @@ void	puterror(int const code)
 		return ;
 	if (code == ERR_ERRNO)
 	{
-		perror(NULL);
+		perror(title);
 		return ;
 	}
+	ft_putstr_fd(title, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd((char *)errors[code], STDERR_FILENO);
 }
 
-void	pexit(int const code, int status)
+void	pexit(int const code, int status, char *title)
 {
-	puterror(code);
+	puterror(title, code);
 	exit(status);
 }
 
 void	pexitfree(int const code, int status, t_meta *meta, void *extra)
 {
-	free(meta);
-	free(extra);
-	pexit(code, status);
+	char *title;
+
+	title = meta->title;
+	cleanup(meta, extra);
+	pexit(code, status, title);
 }

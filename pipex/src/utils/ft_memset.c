@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/27 23:34:55 by rmander          ###   ########.fr       */
+/*   Created: 2021/07/27 21:00:27 by rmander           #+#    #+#             */
+/*   Updated: 2021/07/27 21:03:52 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include <stdlib.h>
 
-# include "pipex.h"
-
-# define ERR_ERRNO (-1) 
-
-typedef enum e_error
+void	*ft_memset(void *b, int c, size_t len)
 {
-	ERR_ARGS_WRONG = 0,
-}	t_error;
+	void	*s;
 
-void	pexit(int const code, int status, char *title);
-void	pexitfree(int const code, int status, t_meta *meta, void *extra);
+	s = b;
+	while (len--)
+		*(unsigned char *)b++ = (unsigned char)c;
+	return (s);
+}
 
-#endif

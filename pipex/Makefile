@@ -6,14 +6,14 @@
 #    By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 21:20:41 by rmander           #+#    #+#              #
-#   Updated: 2021/07/19 16:16:52 by rmander          ###   ########.fr       # #
+#   Updated: 2021/07/27 20:57:23 by rmander          ###   ########.fr       # #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-CC = clang-12
+CC = cc
 INCLUDE = ./include
-CFLAGS = -Wall -Wextra -Werror -MMD -I$(INCLUDE)
+CFLAGS = -fsanitize=address -fsanitize=leak -Wall -Wextra -Werror -MMD -I$(INCLUDE)
 SRCS =  ./src/utils/ft_strlen_until.c \
 		./src/utils/ft_strlen.c \
 		./src/utils/ft_strdup_until.c \
@@ -21,10 +21,12 @@ SRCS =  ./src/utils/ft_strlen_until.c \
 		./src/utils/ft_putendl_fd.c \
 		./src/utils/ft_putstr_fd.c \
 		./src/utils/ft_memcpy.c \
+		./src/utils/ft_memset.c \
 		./src/utils/ft_strjoin.c \
 		./src/utils/ft_strcmp.c \
 		./src/utils/ft_strchr.c \
 		./src/utils/alloca_to.c \
+		./src/utils/cleanup.c \
 		./src/utils/ft_isspace.c \
 		./src/utils/ft_split.c \
 		./src/utils/ft_lstadd_back.c \

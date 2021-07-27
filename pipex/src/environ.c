@@ -14,6 +14,7 @@
 #include "error.h"
 #include "utils.h"
 #include "environ.h"
+#include <stdlib.h>
 #include <errno.h>
 
 static void	add_environ(t_meta *meta, t_kv *kv) 
@@ -42,9 +43,9 @@ void	build_environ(t_meta *meta, char **envp)
 	kv = NULL;
 	curr = NULL;
 	while (*envp)
-	{	
+	{
 		curr = *envp;
-		if (!alloca_to((void **)&kv, sizeof(t_kv)))
+		if (!alloca_to((void **) &kv, sizeof(t_kv)))
 			pexitfree(ERR_ERRNO, 255, meta, NULL);
 		kv->key = ft_strdup_until(curr, '=');
 		if (!kv->key)
@@ -52,7 +53,10 @@ void	build_environ(t_meta *meta, char **envp)
 		curr = ft_strchr(curr, '=');
 		kv->value = ft_strdup_until(++curr, '\0');
 		if (!kv->value)
-			pexitfree(ERR_ERRNO, errno, meta, kv); 
+		{
+			free(kv->key);
+			pexitfree(ERR_ERRNO, errno, meta, kv);
+		}
 		add_environ(meta, kv);
 		kv = NULL;
 		envp++;
