@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:14:33 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 00:32:48 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 00:58:36 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 static void	cleandirs(t_meta *data)
 {
 	char	*dir;
+	char 	**start;
 
+	start = data->dirs;
 	dir = *data->dirs;
 	while (dir)
 	{
@@ -27,6 +29,7 @@ static void	cleandirs(t_meta *data)
 		++data->dirs;
 		dir = *data->dirs; 
 	}
+	free(start);
 	data->dirs = NULL;
 }
 
