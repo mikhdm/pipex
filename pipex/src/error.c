@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:27 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 00:24:50 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 21:15:45 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 
 static void	puterror(char *title, int const code)
 {
-	int			count;
 	const char	*errors[] = {"Invalid arguments", "Empty command", "Empty file"};
 
-	count = (int)(sizeof(errors) / sizeof(*errors)); 
-	if ((code != ERR_ERRNO) && (code < 0 || code >= count))
+	if ((code != ERR_ERRNO)
+		&& (code < 0 || code >= (int)(sizeof(errors) / sizeof(*errors))))
 		return ;
 	if (code == ERR_ERRNO)
 	{

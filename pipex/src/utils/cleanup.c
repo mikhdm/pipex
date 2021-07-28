@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:14:33 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 21:02:53 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 22:11:14 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "environ.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 static void	cleandirs(t_meta *data)
 {
@@ -90,13 +91,16 @@ void		cleanup(void *meta, void *extra)
 		free(extra);
 	if (data)
 	{
-		if (data->ifd > STDERR_FILENO)
+		if (data->ifd != -1)
 			close(data->ifd);
-		if (data->ofd > STDERR_FILENO)
+
+		if (data->ofd != -1)
 			close(data->ofd);
-		if (data->pfds[0] > STDERR_FILENO)
+
+		if (data->pfds[0] != -1)
 			close(data->pfds[0]);
-		if (data->pfds[1] > STDERR_FILENO)
+
+		if (data->pfds[1] != -1)
 			close(data->pfds[1]);
 		cleandirs(data);
 		cleanenv(data);

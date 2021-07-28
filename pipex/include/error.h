@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 19:03:29 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 21:15:30 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "pipex.h"
 
-# define ERR_ERRNO (-1) 
+# define ERR_ERRNO (-1)
 
 typedef enum e_error
 {

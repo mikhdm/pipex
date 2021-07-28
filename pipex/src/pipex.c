@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 20:51:56 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 21:18:44 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <errno.h>
 
 char 	**dirs(t_meta *meta, const char *path)
 {
@@ -26,7 +25,7 @@ char 	**dirs(t_meta *meta, const char *path)
 		return (NULL);
 	strs = ft_split(path, ':');
 	if (!strs)
-		pexitfree(ERR_ERRNO, errno, meta, NULL);
+		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 	return (strs);
 }
 
@@ -54,10 +53,10 @@ char	*bin(t_meta *meta, const char *base)
 	{
 		path = ft_strjoin(*dirs, "/");
 		if (!path)
-			pexitfree(ERR_ERRNO, errno, meta, NULL);
+			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 		path = ft_strjoin(path, base);
 		if (!path)
-			pexitfree(ERR_ERRNO, errno, meta, path);
+			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, path);
 		ok = access(path, F_OK | X_OK);
 		if (ok == 0)
 			return (path);
@@ -101,10 +100,10 @@ void	set_cmdlist(t_meta *meta, char **argv)
 	{
 		raw = argv[i + 2];
 		if (!*raw)
-			pexitfree(ERR_EMPTY_COMMAND, 255, meta, NULL);
+			pexitfree(ERR_EMPTY_COMMAND, EXIT_FAILURE, meta, NULL);
 		strs = ft_splitf(raw, ft_isspace); 
 		if (!strs)
-			pexitfree(ERR_ERRNO, errno, meta, NULL);
+			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 		meta->cmd[i] = strs;
 		++i;
 	}
@@ -116,9 +115,9 @@ void	setup(t_meta *meta, char **argv, char **envp)
 	build_environ(meta, envp);
 	set_cmdlist(meta, argv);
 	if (!*argv[1])
-		pexitfree(ERR_EMPTY_FILE, 255, meta, NULL);
+		pexitfree(ERR_EMPTY_FILE, EXIT_FAILURE, meta, NULL);
 	if (!*argv[4])
-		pexitfree(ERR_EMPTY_FILE, 255, meta, NULL);
+		pexitfree(ERR_EMPTY_FILE, EXIT_FAILURE, meta, NULL);
 	meta->in = argv[1];
 	meta->out = argv[4];
 	meta->envp = envp;
