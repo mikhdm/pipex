@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:14:33 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 19:06:07 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 21:02:53 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,18 @@ static void cleancmd(t_meta *data)
 	start = NULL;
 	while (i < 2)
 	{
-		strs = data->cmd[i];
-		if (!strs)
+		if (!data->cmd[i])
 		{
 			++i;
 			continue ;
 		}
-		start = strs;
-		while (strs)
+		start = data->cmd[i];
+		strs = data->cmd[i];
+		while (*strs)
 			free(*strs++);
 		free(start);
+		start = NULL;
+		++i;
 	}
 }
 

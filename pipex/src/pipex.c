@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 19:06:28 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 20:51:56 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	set_cmdlist(t_meta *meta, char **argv)
 	while (i < 2)
 	{
 		raw = argv[i + 2];
-		if (!raw)
+		if (!*raw)
 			pexitfree(ERR_EMPTY_COMMAND, 255, meta, NULL);
 		strs = ft_splitf(raw, ft_isspace); 
 		if (!strs)
@@ -112,12 +112,12 @@ void	set_cmdlist(t_meta *meta, char **argv)
 
 void	setup(t_meta *meta, char **argv, char **envp)
 {
+	meta->title = argv[0];
 	build_environ(meta, envp);
 	set_cmdlist(meta, argv);
-	meta->title = argv[0];
-	if (!argv[1])
+	if (!*argv[1])
 		pexitfree(ERR_EMPTY_FILE, 255, meta, NULL);
-	if (!argv[4])
+	if (!*argv[4])
 		pexitfree(ERR_EMPTY_FILE, 255, meta, NULL);
 	meta->in = argv[1];
 	meta->out = argv[4];

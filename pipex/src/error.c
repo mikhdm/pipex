@@ -19,7 +19,7 @@
 static void	puterror(char *title, int const code)
 {
 	int			count;
-	const char	*errors[] = {"Invalid arguments"};
+	const char	*errors[] = {"Invalid arguments", "Empty command", "Empty file"};
 
 	count = (int)(sizeof(errors) / sizeof(*errors)); 
 	if ((code != ERR_ERRNO) && (code < 0 || code >= count))
