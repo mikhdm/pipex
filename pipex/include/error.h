@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/27 23:34:55 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 19:03:29 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 typedef enum e_error
 {
 	ERR_ARGS_WRONG = 0,
+	ERR_EMPTY_COMMAND,
+	ERR_EMPTY_FILE
 }	t_error;
 
 void	pexit(int const code, int status, char *title);

@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:14:33 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 00:58:36 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 19:06:07 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static void	cleandirs(t_meta *data)
 {
 	char	*dir;
 	char 	**start;
-
+	
+	if (!data->dirs)
+		return ;
 	start = data->dirs;
 	dir = *data->dirs;
 	while (dir)
@@ -47,8 +49,34 @@ static void cleankv(void *kv)
 
 static void	cleanenv(t_meta *data)
 {
+	if (!data->env)
+		return ;
 	ft_lstclear(&data->env, cleankv);
 	data->env = NULL;
+}
+
+static void cleancmd(t_meta *data)
+{
+	int i;
+	char **strs;
+	char **start;
+
+	i = 0;
+	strs = NULL;
+	start = NULL;
+	while (i < 2)
+	{
+		strs = data->cmd[i];
+		if (!strs)
+		{
+			++i;
+			continue ;
+		}
+		start = strs;
+		while (strs)
+			free(*strs++);
+		free(start);
+	}
 }
 
 void		cleanup(void *meta, void *extra)
@@ -68,10 +96,9 @@ void		cleanup(void *meta, void *extra)
 			close(data->pfds[0]);
 		if (data->pfds[1] > STDERR_FILENO)
 			close(data->pfds[1]);
-		if (data->dirs)
-			cleandirs(data);
-		if (data->env)
-			cleanenv(data);
+		cleandirs(data);
+		cleanenv(data);
+		cleancmd(data);
 		free(data);
 	}
 	data = NULL;

@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 00:18:04 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 19:06:28 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "environ.h"
 #include "utils.h"
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
 
@@ -66,10 +67,8 @@ char	*bin(t_meta *meta, const char *base)
 }
 
 /*
-*
-* title, in, out, envp - memory located on stack
-* env, dirs - memory located on heap
-*
+* title, in, out, envp - memory located on the stack
+* env, dirs, cmd[0], cmd[1] - memory located on a heap
 */
 void	init(t_meta *meta)
 {
@@ -83,14 +82,42 @@ void	init(t_meta *meta)
 	meta->ofd = -1;
 	meta->pfds[0] = -1;
 	meta->pfds[1] = -1;
+	meta->cmd[0] = NULL;
+	meta->cmd[1] = NULL;
 	ft_memset(meta->pfds, -1, sizeof(int) * 2);
 	ft_memset(meta->pids, -1, sizeof(pid_t) * 2);
+}
+
+void	set_cmdlist(t_meta *meta, char **argv)
+{
+	int		i;
+	char	*raw;
+	char	**strs;
+
+	i = 0;
+	raw = NULL;
+	strs = NULL;
+	while (i < 2)
+	{
+		raw = argv[i + 2];
+		if (!raw)
+			pexitfree(ERR_EMPTY_COMMAND, 255, meta, NULL);
+		strs = ft_splitf(raw, ft_isspace); 
+		if (!strs)
+			pexitfree(ERR_ERRNO, errno, meta, NULL);
+		meta->cmd[i] = strs;
+	}
 }
 
 void	setup(t_meta *meta, char **argv, char **envp)
 {
 	build_environ(meta, envp);
+	set_cmdlist(meta, argv);
 	meta->title = argv[0];
+	if (!argv[1])
+		pexitfree(ERR_EMPTY_FILE, 255, meta, NULL);
+	if (!argv[4])
+		pexitfree(ERR_EMPTY_FILE, 255, meta, NULL);
 	meta->in = argv[1];
 	meta->out = argv[4];
 	meta->envp = envp;
