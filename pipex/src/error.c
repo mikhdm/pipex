@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:27 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 21:15:45 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 00:21:56 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 static void	puterror(char *title, int const code)
 {
-	const char	*errors[] = {"Invalid arguments", "Empty command", "Empty file"};
+	const char	*errors[] = {"invalid arguments",
+		"empty command", "empty file", "command not found"};
 
 	if ((code != ERR_ERRNO)
 		&& (code < 0 || code >= (int)(sizeof(errors) / sizeof(*errors))))

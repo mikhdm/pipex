@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:01:08 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 22:19:03 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 01:10:06 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,55 +17,60 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <stdio.h>
 
-static void	rightchild(t_meta *meta)
+static int	rightchild(t_meta *meta)
 {
 	if (close(meta->pfds[1]) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	meta->pfds[1] = -1;
 	if (dup2(meta->pfds[0], STDIN_FILENO) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	if (close(meta->pfds[0]) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	meta->pfds[0] = -1;
 	meta->ofd = open(meta->out, (O_WRONLY | O_CREAT | O_TRUNC),
 					 (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
 	if (meta->ofd == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	if (dup2(meta->ofd, STDOUT_FILENO) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	if (close(meta->ofd) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	meta->ofd = -1;
+	return (EXIT_SUCCESS);
 }
 
-static void	leftchild(t_meta *meta)
+static int leftchild(t_meta *meta)
 {
 	if (close(meta->pfds[0]) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	meta->pfds[0] = -1;
 	if (dup2(meta->pfds[1], STDOUT_FILENO) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	if (close(meta->pfds[1]) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	meta->pfds[1] = -1;
 	meta->ifd = open(meta->in, O_RDONLY);
 	if (meta->ifd == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	if (dup2(meta->ifd, STDIN_FILENO) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	if (close(meta->ifd) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+		return (EXIT_FAILURE);
 	meta->ifd = -1;
+	return (EXIT_SUCCESS);
 }
 
 static void pipex(t_meta *meta)
 {
 	int		i;
+	int		status;
 	char	*program;
 
 	i = 0;
 	program = NULL;
+	status = EXIT_SUCCESS;
 	if (pipe(meta->pfds) == -1)
 		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 	while (i < 2)
@@ -75,13 +80,17 @@ static void pipex(t_meta *meta)
 			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 		else if (meta->pids[i] == 0)
 		{
-			if (i == 0)
-				leftchild(meta);
-			else if (i == 1)
-				rightchild(meta);
 			program = bin(meta, meta->cmd[i][0]);
-			execve(program, meta->cmd[i], meta->envp);
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, program);
+			if (!program)
+				pexitfree(ERR_CMD_NOT_FOUND, EXIT_FAILURE, meta, NULL);
+			if (i == 0)
+				status = leftchild(meta);
+			else if (i == 1)
+				status = rightchild(meta);
+			if (status == EXIT_FAILURE)
+				pexitfree(ERR_ERRNO, status, meta, program);
+			if(execve(program, meta->cmd[i], meta->envp) == -1)
+				pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, program);
 		}
 		else
 			++i;

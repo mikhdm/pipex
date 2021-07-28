@@ -13,7 +13,7 @@
 NAME = pipex
 CC = cc
 INCLUDE = ./include
-CFLAGS = -fsanitize=address -fsanitize=leak -Wall -Wextra -Werror -MMD -I$(INCLUDE)
+CFLAGS = -fsanitize=address -fsanitize=leak -g -Wall -Wextra -Werror -MMD -I$(INCLUDE)
 SRCS =  ./src/utils/ft_strlen_until.c \
 		./src/utils/ft_strlen.c \
 		./src/utils/ft_strdup_until.c \

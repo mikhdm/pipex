@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 21:18:44 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 00:56:19 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,35 @@ char 	**dirs(t_meta *meta, const char *path)
 
 char	*bin(t_meta *meta, const char *base) 
 {
-	char	*slashed;
-	int		ok;
 	char	*path;
 	char	**dirs;
+	char	*tmp;
 
-	dirs = NULL;
 	path = NULL;
-	slashed = ft_strchr(base, '/');
+	tmp = NULL;
+	dirs = meta->dirs;
 	if (!base)
 		return (NULL);
-	if (slashed)
+	if (ft_strchr(base, '/'))
 	{
-		ok = access(base, F_OK | X_OK);
-		if (ok == 0)
+		if (access(base, F_OK | X_OK) == 0)
 			return ((char *)base);
 		return (NULL);
 	}
-	dirs = meta->dirs;
 	while (*dirs)
 	{
-		path = ft_strjoin(*dirs, "/");
-		if (!path)
+		tmp = ft_strjoin(*dirs++, "/");
+		if (!tmp)
 			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
-		path = ft_strjoin(path, base);
+		path = ft_strjoin(tmp, base);
 		if (!path)
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, path);
-		ok = access(path, F_OK | X_OK);
-		if (ok == 0)
+			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, tmp);
+		free(tmp);
+		if (access(path, F_OK | X_OK) == 0)
 			return (path);
-		++dirs;
+		free(path);
+		path = NULL;
+		tmp = NULL;
 	}
 	return (NULL);
 }
@@ -104,8 +103,7 @@ void	set_cmdlist(t_meta *meta, char **argv)
 		strs = ft_splitf(raw, ft_isspace); 
 		if (!strs)
 			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
-		meta->cmd[i] = strs;
-		++i;
+		meta->cmd[i++] = strs;
 	}
 }
 

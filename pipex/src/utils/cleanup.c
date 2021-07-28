@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:14:33 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 22:11:14 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 01:05:37 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,15 @@ static void cleancmd(t_meta *data)
 	start = NULL;
 	while (i < 2)
 	{
-		if (!data->cmd[i])
+		if (data->cmd[i])
 		{
-			++i;
-			continue ;
+			start = data->cmd[i];
+			strs = data->cmd[i];
+			while (*strs)
+				free(*strs++);
+			free(start);
+			start = NULL;
 		}
-		start = data->cmd[i];
-		strs = data->cmd[i];
-		while (*strs)
-			free(*strs++);
-		free(start);
-		start = NULL;
 		++i;
 	}
 }
@@ -93,13 +91,10 @@ void		cleanup(void *meta, void *extra)
 	{
 		if (data->ifd != -1)
 			close(data->ifd);
-
 		if (data->ofd != -1)
 			close(data->ofd);
-
 		if (data->pfds[0] != -1)
 			close(data->pfds[0]);
-
 		if (data->pfds[1] != -1)
 			close(data->pfds[1]);
 		cleandirs(data);
