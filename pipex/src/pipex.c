@@ -106,6 +106,7 @@ void	set_cmdlist(t_meta *meta, char **argv)
 		if (!strs)
 			pexitfree(ERR_ERRNO, errno, meta, NULL);
 		meta->cmd[i] = strs;
+		++i;
 	}
 }
 

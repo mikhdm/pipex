@@ -6,14 +6,13 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:01:08 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 19:06:36 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/28 20:01:32 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "utils.h"
 #include "error.h"
-#include "environ.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
