@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 21:00:27 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/27 21:03:52 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:32:50 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ void	*ft_memset(void *b, int c, size_t len)
 		*(unsigned char *)b++ = (unsigned char)c;
 	return (s);
 }
-

@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 23:30:10 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 23:49:01 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:33:38 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ft_strchr(const char *s, int c)
 	while (*s)
 	{
 		if (*s == (char)c)
-			return ((char*)s);
+			return ((char *)s);
 		++s;
 	}
 	if (*s == (char)c)
-		return ((char*)s);
+		return ((char *)s);
 	return (NULL);
 }

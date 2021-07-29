@@ -6,10 +6,10 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 18:15:21 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/19 18:17:18 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:32:33 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-  
+
 #include "utils.h"
 
 int	ft_isspace(int c)

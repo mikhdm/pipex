@@ -6,15 +6,15 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 18:34:46 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/19 23:06:24 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:30:38 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENVIRON_H
 # define ENVIRON_H
 
-#include "utils.h"
-#include "pipex.h"
+# include "utils.h"
+# include "pipex.h"
 
 typedef struct s_kv {
 	char	*key;

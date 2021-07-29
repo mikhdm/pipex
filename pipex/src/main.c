@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:01:08 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 01:10:06 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:18:54 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void pipex(t_meta *meta)
 				status = rightchild(meta);
 			if (status == EXIT_FAILURE)
 				pexitfree(ERR_ERRNO, status, meta, program);
-			if(execve(program, meta->cmd[i], meta->envp) == -1)
+			if (execve(program, meta->cmd[i], meta->envp) == -1)
 				pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, program);
 		}
 		else

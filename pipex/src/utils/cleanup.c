@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 22:14:33 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 01:05:37 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:51:19 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static void	cleandirs(t_meta *data)
+static	void	cleandirs(t_meta *data)
 {
 	char	*dir;
-	char 	**start;
-	
+	char	**start;
+
 	if (!data->dirs)
 		return ;
 	start = data->dirs;
@@ -30,15 +30,15 @@ static void	cleandirs(t_meta *data)
 		free(dir);
 		dir = NULL;
 		++data->dirs;
-		dir = *data->dirs; 
+		dir = *data->dirs;
 	}
 	free(start);
 	data->dirs = NULL;
 }
 
-static void cleankv(void *kv)
+static	void	cleankv(void *kv)
 {
-	t_kv *data;
+	t_kv	*data;
 
 	data = (t_kv *)kv;
 	if (data->key)
@@ -48,7 +48,7 @@ static void cleankv(void *kv)
 	free(kv);
 }
 
-static void	cleanenv(t_meta *data)
+static	void	cleanenv(t_meta *data)
 {
 	if (!data->env)
 		return ;
@@ -56,11 +56,11 @@ static void	cleanenv(t_meta *data)
 	data->env = NULL;
 }
 
-static void cleancmd(t_meta *data)
+static	void	cleancmd(t_meta *data)
 {
-	int i;
-	char **strs;
-	char **start;
+	int		i;
+	char	**strs;
+	char	**start;
 
 	i = 0;
 	strs = NULL;
@@ -80,7 +80,7 @@ static void cleancmd(t_meta *data)
 	}
 }
 
-void		cleanup(void *meta, void *extra)
+void	cleanup(void *meta, void *extra)
 {
 	t_meta	*data;
 

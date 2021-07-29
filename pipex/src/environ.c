@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 18:34:58 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/28 21:19:29 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:38:44 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "environ.h"
 #include <stdlib.h>
 
-static void	add_environ(t_meta *meta, t_kv *kv) 
+static	void	add_environ(t_meta *meta, t_kv *kv)
 {
 	t_list	*node;
 
@@ -24,7 +24,7 @@ static void	add_environ(t_meta *meta, t_kv *kv)
 	if (!node)
 		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, kv);
 	if (meta->env)
-		ft_lstadd_back(&(meta->env), node); 
+		ft_lstadd_back(&(meta->env), node);
 	else
 		meta->env = node;
 }

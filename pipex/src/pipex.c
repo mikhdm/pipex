@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 00:56:19 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:51:36 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-char 	**dirs(t_meta *meta, const char *path)
+char	**dirs(t_meta *meta, const char *path)
 {
-	char **strs;
+	char	**strs;
+
 	if (!path)
 		return (NULL);
 	strs = ft_split(path, ':');
@@ -29,7 +30,7 @@ char 	**dirs(t_meta *meta, const char *path)
 	return (strs);
 }
 
-char	*bin(t_meta *meta, const char *base) 
+char	*bin(t_meta *meta, const char *base)
 {
 	char	*path;
 	char	**dirs;
@@ -100,7 +101,7 @@ void	set_cmdlist(t_meta *meta, char **argv)
 		raw = argv[i + 2];
 		if (!*raw)
 			pexitfree(ERR_EMPTY_COMMAND, EXIT_FAILURE, meta, NULL);
-		strs = ft_splitf(raw, ft_isspace); 
+		strs = ft_splitf(raw, ft_isspace);
 		if (!strs)
 			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 		meta->cmd[i++] = strs;
@@ -114,9 +115,9 @@ void	setup(t_meta *meta, char **argv, char **envp)
 	set_cmdlist(meta, argv);
 	if (!*argv[1])
 		pexitfree(ERR_EMPTY_FILE, EXIT_FAILURE, meta, NULL);
+	meta->in = argv[1];
 	if (!*argv[4])
 		pexitfree(ERR_EMPTY_FILE, EXIT_FAILURE, meta, NULL);
-	meta->in = argv[1];
 	meta->out = argv[4];
 	meta->envp = envp;
 	meta->dirs = dirs(meta, get_environ_by_key(meta, "PATH"));

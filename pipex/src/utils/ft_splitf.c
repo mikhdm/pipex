@@ -6,10 +6,9 @@
 /*   By: rmander <rmander@student.21-school.ru      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 22:22:32 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/13 22:23:06 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:33:56 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "utils.h"
 #include <stddef.h>

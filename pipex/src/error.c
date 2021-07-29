@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:27 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 00:21:56 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/29 03:39:03 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	pexit(int const code, int status, char *title)
 
 void	pexitfree(int const code, int status, t_meta *meta, void *extra)
 {
-	char *title;
+	char	*title;
 
 	title = meta->title;
 	cleanup(meta, extra);
