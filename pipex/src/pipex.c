@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:01:22 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 03:51:36 by mikhaylen        ###   ########.fr       */
+/*   Updated: 2021/07/29 23:56:51 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,6 @@ char	**dirs(t_meta *meta, const char *path)
 	if (!strs)
 		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 	return (strs);
-}
-
-char	*bin(t_meta *meta, const char *base)
-{
-	char	*path;
-	char	**dirs;
-	char	*tmp;
-
-	path = NULL;
-	tmp = NULL;
-	dirs = meta->dirs;
-	if (!base)
-		return (NULL);
-	if (ft_strchr(base, '/'))
-	{
-		if (access(base, F_OK | X_OK) == 0)
-			return ((char *)base);
-		return (NULL);
-	}
-	while (*dirs)
-	{
-		tmp = ft_strjoin(*dirs++, "/");
-		if (!tmp)
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
-		path = ft_strjoin(tmp, base);
-		if (!path)
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, tmp);
-		free(tmp);
-		if (access(path, F_OK | X_OK) == 0)
-			return (path);
-		free(path);
-		path = NULL;
-		tmp = NULL;
-	}
-	return (NULL);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:01:08 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 03:54:30 by mikhaylen        ###   ########.fr       */
+/*   Updated: 2021/07/30 00:54:03 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,14 @@ static	int	leftchild(t_meta *meta)
 	return (EXIT_SUCCESS);
 }
 
-static	void	pipex(t_meta *meta)
+static void		core(t_meta *meta)
 {
 	int		i;
 	int		status;
-	char	*program;
+	char 	*program;
 
 	i = 0;
-	program = NULL;
 	status = EXIT_SUCCESS;
-	if (pipe(meta->pfds) == -1)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 	while (i < 2)
 	{
 		meta->pids[i] = fork();
@@ -80,13 +77,10 @@ static	void	pipex(t_meta *meta)
 			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 		else if (meta->pids[i] == 0)
 		{
-			program = bin(meta, meta->cmd[i][0]);
+			program = getbin(meta, meta->cmd[i][0]);
 			if (!program)
 				pexitfree(ERR_CMD_NOT_FOUND, EXIT_FAILURE, meta, NULL);
-			if (i == 0)
-				status = leftchild(meta);
-			else if (i == 1)
-				status = rightchild(meta);
+			status = ternary_op(i == 0, leftchild(meta), rightchild(meta));
 			if (status == EXIT_FAILURE)
 				pexitfree(ERR_ERRNO, status, meta, program);
 			if (execve(program, meta->cmd[i], meta->envp) == -1)
@@ -95,7 +89,16 @@ static	void	pipex(t_meta *meta)
 		else
 			++i;
 	}
+}
+
+static	void	pipex(t_meta *meta)
+{
+	int		i;
+
 	i = 0;
+	if (pipe(meta->pfds) == -1)
+		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+	core(meta);
 	if (close(meta->pfds[0]) == -1)
 		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 	meta->pfds[0] = -1;
@@ -103,11 +106,8 @@ static	void	pipex(t_meta *meta)
 		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
 	meta->pfds[1] = -1;
 	while (i < 2)
-	{
-		if (waitpid(meta->pids[i], NULL, 0) == -1)
+		if (waitpid(meta->pids[i++], NULL, 0) == -1)
 			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
-		++i;
-	}
 }
 
 int	main(int argc, char **argv, char **envp)

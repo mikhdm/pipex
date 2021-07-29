@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:19:50 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 03:31:09 by mikhaylen        ###   ########.fr       */
+/*   Updated: 2021/07/29 23:15:59 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 short int	alloca_to(void **ptr, size_t size);
 void		cleanup(void *meta, void *extra);
+char		*getbin(void *meta, const char *base);
 char		**ft_split(char const *s, char c);
 int			ft_isspace(int c);
 
