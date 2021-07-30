@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 23:08:55 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/30 17:53:08 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/30 18:20:16 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*lookup(t_meta *meta, const char *base)
 	tmp = NULL;
 	path = NULL;
 	dirs = meta->dirs;
+	if (!dirs)
+		return (NULL);
 	while (*dirs)
 	{
 		tmp = ft_strjoin(*dirs++, "/");
