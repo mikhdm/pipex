@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: rmander <rmander@student.21-school.ru      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/18 21:20:41 by rmander           #+#    #+#              #
-#   Updated: 2021/07/27 20:57:23 by rmander          ###   ########.fr       # #
+#    Created: 2021/07/30 19:21:05 by rmander           #+#    #+#              #
+#    Updated: 2021/07/30 19:21:08 by rmander          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
