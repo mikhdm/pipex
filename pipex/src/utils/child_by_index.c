@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ternary_op.c                                       :+:      :+:    :+:   */
+/*   child_by_index.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 00:52:03 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/30 00:53:59 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/30 02:36:52 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ternary_op(int val, void *left, void *right)
+#include "utils.h"
+
+t_func_child	child_by_index(int pred,
+					t_func_child l, t_func_child r)
 {
-	if (val)
-		return (left);
-	return (right);
+	if (pred)
+		return (l);
+	return (r);
 }

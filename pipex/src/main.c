@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:01:08 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/30 00:54:03 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/30 02:48:45 by mikhaylen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,22 @@
 #include <sys/wait.h>
 #include <stdio.h>
 
-static int	rightchild(t_meta *meta)
+static int	rightchild(void *data, char *program)
 {
+	t_meta	*meta;
+
+	meta = (t_meta *)data;
+	meta->ofd = open(meta->out, (O_WRONLY | O_CREAT | O_TRUNC),
+			(S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
+	if (meta->ofd == -1)
+		return (EXIT_FAILURE);
+	if (!program)
+		return (ERR_CMD_NOT_FOUND);
+	if (dup2(meta->ofd, STDOUT_FILENO) == -1)
+		return (EXIT_FAILURE);
+	if (close(meta->ofd) == -1)
+		return (EXIT_FAILURE);
+	meta->ofd = -1;
 	if (close(meta->pfds[1]) == -1)
 		return (EXIT_FAILURE);
 	meta->pfds[1] = -1;
@@ -29,20 +43,24 @@ static int	rightchild(t_meta *meta)
 	if (close(meta->pfds[0]) == -1)
 		return (EXIT_FAILURE);
 	meta->pfds[0] = -1;
-	meta->ofd = open(meta->out, (O_WRONLY | O_CREAT | O_TRUNC),
-			(S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
-	if (meta->ofd == -1)
-		return (EXIT_FAILURE);
-	if (dup2(meta->ofd, STDOUT_FILENO) == -1)
-		return (EXIT_FAILURE);
-	if (close(meta->ofd) == -1)
-		return (EXIT_FAILURE);
-	meta->ofd = -1;
 	return (EXIT_SUCCESS);
 }
 
-static	int	leftchild(t_meta *meta)
+static	int	leftchild(void *data, char *program)
 {
+	t_meta	*meta;
+
+	meta = (t_meta *)data;
+	meta->ifd = open(meta->in, O_RDONLY);
+	if (meta->ifd == -1)
+		return (EXIT_FAILURE);
+	if (!program)
+		return (ERR_CMD_NOT_FOUND);
+	if (dup2(meta->ifd, STDIN_FILENO) == -1)
+		return (EXIT_FAILURE);
+	if (close(meta->ifd) == -1)
+		return (EXIT_FAILURE);
+	meta->ifd = -1;
 	if (close(meta->pfds[0]) == -1)
 		return (EXIT_FAILURE);
 	meta->pfds[0] = -1;
@@ -51,22 +69,14 @@ static	int	leftchild(t_meta *meta)
 	if (close(meta->pfds[1]) == -1)
 		return (EXIT_FAILURE);
 	meta->pfds[1] = -1;
-	meta->ifd = open(meta->in, O_RDONLY);
-	if (meta->ifd == -1)
-		return (EXIT_FAILURE);
-	if (dup2(meta->ifd, STDIN_FILENO) == -1)
-		return (EXIT_FAILURE);
-	if (close(meta->ifd) == -1)
-		return (EXIT_FAILURE);
-	meta->ifd = -1;
 	return (EXIT_SUCCESS);
 }
 
-static void		core(t_meta *meta)
+static	void	core(t_meta *meta)
 {
 	int		i;
 	int		status;
-	char 	*program;
+	char	*program;
 
 	i = 0;
 	status = EXIT_SUCCESS;
@@ -78,10 +88,8 @@ static void		core(t_meta *meta)
 		else if (meta->pids[i] == 0)
 		{
 			program = getbin(meta, meta->cmd[i][0]);
-			if (!program)
-				pexitfree(ERR_CMD_NOT_FOUND, EXIT_FAILURE, meta, NULL);
-			status = ternary_op(i == 0, leftchild(meta), rightchild(meta));
-			if (status == EXIT_FAILURE)
+			status = child_by_index(i == 0, leftchild, rightchild)(meta, program);
+			if (status == EXIT_FAILURE || status == ERR_CMD_NOT_FOUND)
 				pexitfree(ERR_ERRNO, status, meta, program);
 			if (execve(program, meta->cmd[i], meta->envp) == -1)
 				pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, program);
