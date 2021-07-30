@@ -23,6 +23,7 @@ set(SRCS
 ./src/utils/alloca_to.c
 ./src/utils/cleanup.c
 ./src/utils/getbin.c
+./src/utils/child_by_index.c
 ./src/utils/ft_isspace.c
 ./src/utils/ft_split.c
 ./src/utils/ft_lstadd_back.c 
