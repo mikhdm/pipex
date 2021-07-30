@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:19:50 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/30 02:43:41 by mikhaylen        ###   ########.fr       */
+/*   Updated: 2021/07/30 17:36:31 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 
 typedef int	(*t_func_child)(void *, char *);
 
-t_func_child	child_by_index(int pred,
+t_func_child	child_by_index(int index,
 					t_func_child l, t_func_child r);
 
 void			*ft_memcpy(void *dst, const void *src, size_t n);

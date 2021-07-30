@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:09:36 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 00:22:11 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/30 17:51:15 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 # include "pipex.h"
 
-# define ERR_ERRNO (-1)
+# define CODE_ERRNO				(-1)
+# define CODE_ARGS_WRONG		0
+# define CODE_EMPTY_COMMAND		1
+# define CODE_EMPTY_FILE		2
+# define CODE_CMD_NOT_FOUND		3
 
-typedef enum e_error
-{
-	ERR_ARGS_WRONG = 0,
-	ERR_EMPTY_COMMAND,
-	ERR_EMPTY_FILE,
-	ERR_CMD_NOT_FOUND
-}	t_error;
+# define EXIT_CMD_FAILURE		-1
 
 void	pexit(int const code, int status, char *title);
 void	pexitfree(int const code, int status, t_meta *meta, void *extra);

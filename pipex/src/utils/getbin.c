@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 23:08:55 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/30 00:31:40 by rmander          ###   ########.fr       */
+/*   Updated: 2021/07/30 17:53:08 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ char	*lookup(t_meta *meta, const char *base)
 	{
 		tmp = ft_strjoin(*dirs++, "/");
 		if (!tmp)
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+			pexitfree(CODE_ERRNO, EXIT_FAILURE, meta, NULL);
 		path = ft_strjoin(tmp, base);
 		if (!path)
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, tmp);
+			pexitfree(CODE_ERRNO, EXIT_FAILURE, meta, tmp);
 		free(tmp);
 		if (access(path, F_OK | X_OK) == 0)
 			return (path);

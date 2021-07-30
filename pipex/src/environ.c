@@ -6,7 +6,7 @@
 /*   By: rmander <rmander@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 18:34:58 by rmander           #+#    #+#             */
-/*   Updated: 2021/07/29 03:38:44 by mikhaylen        ###   ########.fr       */
+/*   Updated: 2021/07/30 17:50:42 by rmander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	void	add_environ(t_meta *meta, t_kv *kv)
 
 	node = ft_lstnew(kv);
 	if (!node)
-		pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, kv);
+		pexitfree(CODE_ERRNO, EXIT_FAILURE, meta, kv);
 	if (meta->env)
 		ft_lstadd_back(&(meta->env), node);
 	else
@@ -45,16 +45,16 @@ void	build_environ(t_meta *meta, char **envp)
 	{
 		curr = *envp;
 		if (!alloca_to((void **) &kv, sizeof(t_kv)))
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, NULL);
+			pexitfree(CODE_ERRNO, EXIT_FAILURE, meta, NULL);
 		kv->key = ft_strdup_until(curr, '=');
 		if (!kv->key)
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, kv);
+			pexitfree(CODE_ERRNO, EXIT_FAILURE, meta, kv);
 		curr = ft_strchr(curr, '=');
 		kv->value = ft_strdup_until(++curr, '\0');
 		if (!kv->value)
 		{
 			free(kv->key);
-			pexitfree(ERR_ERRNO, EXIT_FAILURE, meta, kv);
+			pexitfree(CODE_ERRNO, EXIT_FAILURE, meta, kv);
 		}
 		add_environ(meta, kv);
 		kv = NULL;
