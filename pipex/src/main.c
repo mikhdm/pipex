@@ -17,7 +17,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-#include <stdio.h>
 
 static int	rightchild(void *data, char *program)
 {

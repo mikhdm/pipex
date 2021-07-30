@@ -32,7 +32,6 @@ typedef struct s_meta {
 
 void		init(t_meta *meta);
 void		setup(t_meta *meta, char **argv, char **envp);
-char		*bin(t_meta *meta, const char *base);
 char		**dirs(t_meta *meta, const char *path);
 
 #endif

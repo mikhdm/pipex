@@ -14,7 +14,6 @@
 #include "environ.h"
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 static	void	cleandirs(t_meta *data)
 {

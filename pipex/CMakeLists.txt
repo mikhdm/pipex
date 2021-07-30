@@ -27,14 +27,9 @@ set(SRCS
 ./src/utils/ft_isspace.c
 ./src/utils/ft_split.c
 ./src/utils/ft_lstadd_back.c 
-./src/utils/ft_lstadd_front.c 
-./src/utils/ft_lstclear.c 
+./src/utils/ft_lstclear.c
 ./src/utils/ft_lstdelone.c 
-./src/utils/ft_lstiter.c 
-./src/utils/ft_lstlast.c 
-./src/utils/ft_lstmap.c 
-./src/utils/ft_lstnew.c 
-./src/utils/ft_lstsize.c
+./src/utils/ft_lstnew.c
 ./src/environ.c
 ./src/pipex.c
 ./src/error.c 

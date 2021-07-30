@@ -47,14 +47,8 @@ char	*lookup(t_meta *meta, const char *base)
 char	*getbin(void *meta, const char *base)
 {
 	t_meta	*data;
-	char	*path;
-	char	*tmp;
-	char	**dirs;
 
-	tmp = NULL;
-	path = NULL;
 	data = (t_meta *)meta;
-	dirs = data->dirs;
 	if (!base)
 		return (NULL);
 	if (ft_strchr(base, '/'))

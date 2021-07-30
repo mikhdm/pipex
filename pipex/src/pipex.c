@@ -14,7 +14,6 @@
 #include "error.h"
 #include "environ.h"
 #include "utils.h"
-#include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
