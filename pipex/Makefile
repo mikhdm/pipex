@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 NAME = pipex
-CC = cc
+CC = clang
 INCLUDE = ./include
-CFLAGS = -fsanitize=address -fsanitize=leak -g -Wall -Wextra -Werror -MMD -I$(INCLUDE)
+CFLAGS = -Wall -Wextra -Werror -MMD -I$(INCLUDE)
 SRCS =  ./src/utils/ft_strlen_until.c \
 		./src/utils/ft_strlen.c \
 		./src/utils/ft_strdup_until.c \
